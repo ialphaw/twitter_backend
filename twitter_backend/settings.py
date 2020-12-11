@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Local Apps
     'account.apps.AccountConfig',
+    'user_profile.apps.UserProfileConfig',
 ]
 
 MIDDLEWARE = [
