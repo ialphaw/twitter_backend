@@ -18,7 +18,7 @@ class CreateAccount(APIView):
             email = serializer.data.get('email')
             username = serializer.data.get('username')
             password = serializer.data.get('password')  
-    
+
             user = Account(email=email, username=username)
             user.set_password(password)          
             user.save()
