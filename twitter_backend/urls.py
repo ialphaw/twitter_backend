@@ -5,5 +5,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('profile/', include('user_profile.urls')),
+    path('post/', include('post.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]

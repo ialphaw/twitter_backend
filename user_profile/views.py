@@ -38,8 +38,8 @@ class FollowUser(APIView):
             from_user = request.user
             to_user_id = serializer.data.get('to_user')
             to_user = Account.object.get(id=to_user_id)
-            is_relation = Relation.objects.filter(from_user=from_user, to_user=to_user).exists()
-            if not is_relation:
+            queryset = Relation.objects.filter(from_user=from_user, to_user=to_user)
+            if not queryset.exists():
                 Relation.objects.create(from_user=from_user, to_user=to_user)
                 return Response({'Message': f'You follow {to_user}'}, status=status.HTTP_201_CREATED)
             
@@ -47,4 +47,25 @@ class FollowUser(APIView):
 
         return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
+
+class UnFollowUser(APIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = RelationSerializer
+
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            from_user = request.user
+            to_user_id = serializer.data.get('to_user')
+            to_user = Account.object.get(id=to_user_id)
+            queryset = Relation.objects.filter(from_user=from_user, to_user=to_user)
+            if queryset.exists():
+                relation = queryset.first()
+                relation.delete()
+                return Response({'Message': f'You un-follow {to_user}'}, status=status.HTTP_201_CREATED)
+            
+            return Response({'Message': 'You don\'t follow this user'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+        return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
     
