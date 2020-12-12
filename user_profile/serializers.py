@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from .models import Profile
+from .models import Profile, Relation
+
 
 class ProfileSerializer(serializers.ModelSerializer):
 
@@ -16,3 +17,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('username', 'email', 'bio', 'age', 'phone')
+
+
+class RelationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Relation
+        fields = ('to_user',)
