@@ -7,4 +7,5 @@ urlpatterns = [
     path('show-my-profile', views.ShowProfile.as_view()),
     path('show-user-profile/<str:username>', views.ShowUserProfile.as_view()),
     path('follow-user', views.FollowUser.as_view()),
+    path('unfollow-user', views.UnFollowUser.as_view()),
 ]

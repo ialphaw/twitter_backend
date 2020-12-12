@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Local Apps
     'account.apps.AccountConfig',
     'user_profile.apps.UserProfileConfig',
+    'post.apps.PostConfig',
 ]
 
 MIDDLEWARE = [
