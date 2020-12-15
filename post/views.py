@@ -36,10 +36,15 @@ class ViewHashtagPost(ListAPIView):
 
    def get_queryset(self):
       hashtag = self.kwargs['hashtag']
-      # hashtag_list = []
-      # hashtag_ins = Hashtag.objects.filter(name=hashtag)
-      # hashtag_list = [i.post for i in hashtag_ins]
       queryset = Post.objects.filter(hashtag__name=hashtag)
+      return queryset
 
-      print(queryset)
+
+class Search(ListAPIView):
+   permission_classes = [IsAuthenticated]
+   serializer_class = PostSerializer
+
+   def get_queryset(self):
+      word = self.kwargs['word']
+      queryset = Post.objects.filter(body__icontains=word)
       return queryset
