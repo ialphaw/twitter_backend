@@ -5,17 +5,29 @@ from account.models import Account
 
 class Post(models.Model):
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
     body = models.TextField(max_length=500)
     created_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-	    ordering = ('created_time',)
+	    ordering = ('-created_time',)
 
-    def __str__(self):
-        return self.title
 
     @property
     def short_body(self):
         verbose_name = 'body'
         return truncatechars(self.body, 10)
+    
+    def __str__(self):
+        return self.short_body
+
+
+
+class Hashtag(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    post = models.ManyToManyField(Post)
+
+    def __str__(self):
+        return self.name
+
+    def get_posts(self):
+        return "\n".join([p.short_body for p in self.post.all()])
