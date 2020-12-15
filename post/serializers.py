@@ -4,19 +4,37 @@ from .models import Post
 
 
 class PostHashtagSerializer(serializers.ModelSerializer):
-    hashtag = serializers.CharField(max_length=64)
-
     class Meta:
         model = Post
-        fields = ('id', 'body', 'hashtag')
+        fields = ('id', 'body')
 
 
 class PostSerializer(serializers.ModelSerializer):
     def get_username(self, obj):
         return obj.author.username
 
+    def get_retweet_username_from(self, obj):
+        try:
+            return obj.retweeted_from.username
+        except:
+            return None
+
+    def get_retweet_username_by(self, obj):
+        try:
+            return obj.retweeted_by.username
+        except:
+            return None
+
     username = serializers.SerializerMethodField('get_username')
+    retweeted_from = serializers.SerializerMethodField('get_retweet_username_from')
+    retweeted_by = serializers.SerializerMethodField('get_retweet_username_by')
 
     class Meta:
         model = Post
-        fields = ('id', 'username', 'body')
+        fields = ('id', 'username', 'body', 'retweeted_from', 'retweeted_by')
+
+
+class RetweetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id',)

@@ -4,8 +4,11 @@ from django.template.defaultfilters import truncatechars
 from account.models import Account
 
 class Post(models.Model):
-    author = models.ForeignKey(Account, on_delete=models.CASCADE)
+    author = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='author')
     body = models.TextField(max_length=500)
+    is_retweeted = models.BooleanField(default=False)
+    retweeted_from = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True, related_name='retweeted_from')
+    retweeted_by = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True, related_name='retweet_by')
     created_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:

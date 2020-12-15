@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Post, Hashtag
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('author', 'short_body', 'created_time')
+    list_display = ('author', 'short_body', 'is_retweeted', 'retweeted_from', 'created_time')
 
 
 class HashtagAdmin(admin.ModelAdmin):

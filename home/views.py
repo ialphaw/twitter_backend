@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -13,9 +14,11 @@ class HomeView(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
+
         related_list = []
         relations = Relation.objects.filter(from_user=user)
         related_list = [user.to_user for user in relations]
+
         queryset = Post.objects.filter(author__in=related_list)
-        print(relations)
+
         return queryset
