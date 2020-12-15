@@ -15,7 +15,7 @@ class HomeView(ListAPIView):
         user = self.request.user
         related_list = []
         relations = Relation.objects.filter(from_user=user)
-        related_list = [rec.to_user for rec in relations]
+        related_list = [user.to_user for user in relations]
         queryset = Post.objects.filter(author__in=related_list)
         print(relations)
         return queryset
