@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     'post.apps.PostConfig',
     'home.apps.HomeConfig',
     'notification.apps.NotificationConfig',
+    'send_email.apps.SendEmailConfig',
+
+    # 3rd Party Apps
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +134,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# CELERY
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+# Email
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'your_account@gmail.com'
+EMAIL_HOST_PASSWORD = 'your account’s password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
