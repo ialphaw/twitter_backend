@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Post
+from .models import Post, Like
 
 
 class PostHashtagSerializer(serializers.ModelSerializer):
@@ -38,3 +38,9 @@ class RetweetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id',)
+
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ('post',)
