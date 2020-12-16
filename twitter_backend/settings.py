@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'user_profile.apps.UserProfileConfig',
     'post.apps.PostConfig',
     'home.apps.HomeConfig',
+    'notification.apps.NotificationConfig',
 ]
 
 MIDDLEWARE = [
