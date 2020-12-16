@@ -20,6 +20,9 @@ class Notif(models.Model):
     is_read2 = models.BooleanField(default=False)
     when = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('-when',)
+
     def __str__(self):
         if self.is_like:
             return self.liker.username

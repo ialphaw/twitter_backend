@@ -9,18 +9,14 @@ from .models import Notif
 class Notification(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = NotifSerializer
-    
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Notif.objects.filter(following=user)
+        queryset = Notif.objects.filter(following=user) | Notif.objects.filter(post__author=user)
+        print(queryset)
         for query in queryset:
             if query.is_read2:
                 query.is_read = True
             query.is_read2 = True
             query.save()
         return queryset
-
-
-
-

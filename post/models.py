@@ -3,10 +3,7 @@ from django.template.defaultfilters import truncatechars
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 
-
 from account.models import Account
-
-
 
 class Post(models.Model):
     author = models.ForeignKey(
