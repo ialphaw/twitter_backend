@@ -14,7 +14,7 @@ class Notification(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Notif.objects.filter(Q(following=user) | Q(post__author=user))
+        queryset = Notif.objects.filter(user=user)
         return queryset
 
 
@@ -23,7 +23,7 @@ class ReadNotification(APIView):
 
     def post(self, request, format=None):
         user = self.request
-        queryset = Notif.objects.filter(Q(following=user) | Q(post__author=user))
+        queryset = Notif.objects.filter(user=user)
         for query in queryset:
             query.is_read = True
             query.save()

@@ -49,7 +49,8 @@ from notification.models import Notif
 @receiver(post_save, sender=Like)
 def save_profile(sender, instance, **kwargs):
     if kwargs['created']:
+        user = instance.post.author
         liker = instance.user
         post = instance.post
-        n1 = Notif(is_like=True, liker=liker, post=post)
+        n1 = Notif(user=user, is_like=True, liker=liker, post=post)
         n1.save()

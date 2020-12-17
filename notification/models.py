@@ -7,6 +7,8 @@ from post.models import Post
 from user_profile.models import Relation
 
 class Notif(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+
     is_like = models.BooleanField(default=False)
     liker = models.ForeignKey(Account, on_delete=models.CASCADE,
                               related_name='liker_notif', blank=True, null=True)
@@ -26,15 +28,14 @@ class Notif(models.Model):
         ordering = ('-when',)
 
     def __str__(self):
-        if self.is_like:
-            return self.liker.username
-        return self.follower.username
+        return self.user.username
 
 
 @receiver(post_save, sender=Relation)
 def save_profile(sender, instance, **kwargs):
     if kwargs['created']:
+        user = instance.to_user
         follower = instance.from_user
         following = instance.to_user
-        n1 = Notif(is_follow=True, follower=follower, following=following)
+        n1 = Notif(user=user, is_follow=True, follower=follower, following=following)
         n1.save()
