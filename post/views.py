@@ -41,17 +41,7 @@ class ViewHashtagPost(ListAPIView):
         hashtag = self.kwargs['hashtag']
         queryset = Post.objects.filter(hashtag__name=hashtag)
         return queryset
-
-
-class Search(ListAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = PostSerializer
-
-    def get_queryset(self):
-        word = self.kwargs['word']
-        queryset = Post.objects.filter(body__icontains=word)
-        return queryset
-
+        
 
 class Retweet(APIView):
     permission_classes = [IsAuthenticated]

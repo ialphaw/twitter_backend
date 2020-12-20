@@ -48,10 +48,18 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'notification.apps.NotificationConfig',
     'send_email.apps.SendEmailConfig',
+    'search.apps.SearchConfig',
 
     # 3rd Party Apps
     'django_celery_beat',
+    'django_elasticsearch_dsl',
 ]
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

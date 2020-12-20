@@ -9,5 +9,4 @@ urlpatterns = [
     path('retweet', views.Retweet.as_view()),
     path('like', views.LikeAPost.as_view()),
     path('un-like', views.UnLikeAPost.as_view()),
-    path('search/<str:word>', views.Search.as_view()),
 ]
