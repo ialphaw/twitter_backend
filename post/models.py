@@ -15,6 +15,8 @@ class Post(models.Model):
     retweeted_by = models.ForeignKey(
         Account, on_delete=models.CASCADE, blank=True, null=True, related_name='retweet_by')
     created_time = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='img/%Y/%m/%d/', blank=True)
+    video = models.FileField(upload_to='video/%Y/%m/%d/', blank=True)
 
     class Meta:
         ordering = ('-created_time',)

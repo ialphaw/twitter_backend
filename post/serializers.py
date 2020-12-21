@@ -6,7 +6,7 @@ from .models import Post, Like
 class PostHashtagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'body')
+        fields = ('id', 'body', 'image', 'video')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'username', 'body', 'retweeted_from', 'retweeted_by')
+        fields = ('id', 'username', 'body', 'image', 'video', 'retweeted_from', 'retweeted_by')
 
 
 class RetweetSerializer(serializers.ModelSerializer):

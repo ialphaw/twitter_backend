@@ -25,6 +25,8 @@ class PostDocument(Document):
         model = Post
         fields = {
             'body',
+            'image',
+            'video',
             'is_retweeted',
             'created_time',
         }
