@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'notification.apps.NotificationConfig',
     'send_email.apps.SendEmailConfig',
     'search.apps.SearchConfig',
+    'recombee',
 
     # 3rd Party Apps
     'django_celery_beat',

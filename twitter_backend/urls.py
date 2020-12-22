@@ -11,6 +11,7 @@ urlpatterns = [
     path('post/', include('post.urls')),
     path('notification/', include('notification.urls')),
     path('search/', include(router.urls)),
+    path('recombee/', include('recombee.urls')),
     path('', include('home.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]
